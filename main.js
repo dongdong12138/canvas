@@ -83,8 +83,6 @@ save.onclick = function () {
   a.download = '我的画';
   a.target = '_blank';
   a.click();
-  context.fillStyle = 'red';
-  context.fillRect(0, 0, canvas.width, canvas.height);
 };
 
 
