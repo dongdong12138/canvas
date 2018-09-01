@@ -5,7 +5,7 @@ var context = canvas.getContext('2d');
 autoSetCanvasSize(canvas);
 
 // 监听鼠标事件
-listenToMouse(canvas);
+listenToUser(canvas);
 
 // 监听橡皮擦
 var eraserEnabled = false;
@@ -40,39 +40,72 @@ function autoSetCanvasSize(canvas) {
 }
 
 // 监听鼠标事件
-function listenToMouse(canvas) {
+function listenToUser(canvas) {
   var using = false;
   var lastPoint = {x: undefined, y: undefined};
-  canvas.onmousedown = function (event) {
-    var x = event.clientX;
-    var y = event.clientY;
-    using = true;
-    if  (eraserEnabled) {
-      context.clearRect(x-5, y-5, 10, 10);
-    } else {
-      lastPoint = {x: x, y: y};
-    }
-  //   drawCircle(x, y, 3);
-  };
 
-  canvas.onmousemove = function (event) {
-    var x = event.clientX;
-    var y = event.clientY;
-    
-    if (!using) { return; }
-
-      if (eraserEnabled) {
+  if (document.body.ontouchstart !== undefined ) {    // 触屏设备
+    canvas.ontouchstart = function (event) {
+      var x = event.touches[0].clientX;
+      var y = event.touches[0].clientY;
+      using = true;
+      if  (eraserEnabled) {
         context.clearRect(x-5, y-5, 10, 10);
       } else {
-        var newPoint = {x: x, y: y};
-        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y, 5);
-        lastPoint = newPoint;
+        lastPoint = {x: x, y: y};
       }
-  };
-
-  canvas.onmouseup = function () {
-    using = false;
-  };
+    };
+  
+    canvas.ontouchmove = function (event) {
+      var x = event.touches[0].clientX;
+      var y = event.touches[0].clientY;
+      
+      if (!using) { return; }
+  
+        if (eraserEnabled) {
+          context.clearRect(x-5, y-5, 10, 10);
+        } else {
+          var newPoint = {x: x, y: y};
+          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y, 5);
+          lastPoint = newPoint;
+        }
+    };
+  
+    canvas.ontouchend = function () {
+      using = false;
+    };
+  } else {                                            // 非触屏设备                                   
+    canvas.onmousedown = function (event) {
+      var x = event.clientX;
+      var y = event.clientY;
+      using = true;
+      if  (eraserEnabled) {
+        context.clearRect(x-5, y-5, 10, 10);
+      } else {
+        lastPoint = {x: x, y: y};
+      }
+    //   drawCircle(x, y, 3);
+    };
+  
+    canvas.onmousemove = function (event) {
+      var x = event.clientX;
+      var y = event.clientY;
+      
+      if (!using) { return; }
+  
+        if (eraserEnabled) {
+          context.clearRect(x-5, y-5, 10, 10);
+        } else {
+          var newPoint = {x: x, y: y};
+          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y, 5);
+          lastPoint = newPoint;
+        }
+    };
+  
+    canvas.onmouseup = function () {
+      using = false;
+    };
+  }
 }
 
 // 画圆
