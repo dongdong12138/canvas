@@ -61,12 +61,21 @@ blue.onclick = function () {
 // 设置画笔粗细
 thin.onclick = function () {
   lineWidth = 2;
+  this.classList.add('active');
+  middle.classList.remove('active');
+  thick.classList.remove('active');
 };
 middle.onclick = function () {
   lineWidth = 4;
+  this.classList.add('active');
+  thin.classList.remove('active');
+  thick.classList.remove('active');
 };
 thick.onclick = function () {
   lineWidth = 6;
+  this.classList.add('active');
+  thin.classList.remove('active');
+  middle.classList.remove('active');
 };
 
 // 清空画布

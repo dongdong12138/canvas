@@ -15,6 +15,9 @@ ul, ol {
 #canvas {
   background: #fff;
   display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 body {
   margin: 0px;
@@ -85,6 +88,10 @@ body {
   height: 0;
   width: 50px;
   margin: 20px 0;
+  transition: all 0.3s;
+}
+.sizes li.active {
+  transform: scale(1.5);
 }
 .sizes li.thin {
   border-top: 2px solid black;
