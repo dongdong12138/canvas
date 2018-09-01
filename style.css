@@ -1,27 +1,100 @@
-button {
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-  }
-  #canvas {
-    background: green;
-    display: block;
-  }
-  body {
-    margin: 0px;
-  }
-  .actions {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-  }
-  .actions #brush {
-    display: none;
-  }
-  .actions.x #brush {
-    display: inline-block;
-  }
-  .actions.x #eraser {
-    display: none;
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
+ul, ol {
+  list-style: none;
+}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+#canvas {
+  background: #fff;
+  display: block;
+}
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+.actions {
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.actions svg {
+  width: 1.5em;
+  height: 1.5em;
+  transition: all 0.3s;
+  margin: 0 5px;
+}
+.actions .clear,
+.actions .save {
+  position: fixed;
+  right: 60px;
+  top: 22px;
+}
+.actions .save {
+  right: 20px;
+}
+.actions svg.active {
+  fill: red;
+  transform: scale(1.2);
+}
+
+.colors {
+  position: fixed;
+  left: 22px;
+  top: 60px;
+}
+.colors li {
+  width: 20px;
+  height: 20px;
+  margin: 10px 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.colors li.active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.95);
+  transform: scale(1.2);
+}
+.colors li.black {
+  background: black;
+}
+.colors li.red {
+  background: red;
+}
+.colors li.green {
+  background: green;
+}
+.colors li.blue {
+  background: blue;
+}
+
+.sizes {
+  position: fixed;
+  right: 20px;
+  top: 60px;
+}
+.sizes li {
+  height: 0;
+  width: 50px;
+  margin: 20px 0;
+}
+.sizes li.thin {
+  border-top: 2px solid black;
+}
+.sizes li.middle {
+  border-top: 4px solid black;
+}
+.sizes li.thick {
+  border-top: 6px solid black;
+}
+
+
+
